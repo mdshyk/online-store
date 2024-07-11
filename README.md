@@ -38,7 +38,7 @@
 <h2>Installation</h2>
 <ol>
     <li>Clone the repository:
-        <pre><code>git clone https://github.com/yourusername/online-store.git
+        <pre><code>git clone https://github.com/mdshyk/online-store.git
 cd online-store</code></pre>
     </li>
     <li>Install dependencies:
