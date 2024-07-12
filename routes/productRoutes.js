@@ -10,7 +10,7 @@ router.get('/all', productController.getAllProducts)
 router
     .route('/')
     .get(authController.protect, productController.getProducts)
-    .post(authController.protect, authController.restrictTo('admin'), productController.createProduct);
+    .post(authController.protect, authController.restrictFor('admin'), productController.createProduct);
 
 router
     .route('/:id')
