@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 </head>
 <body>
 
@@ -12,7 +11,7 @@
 
 <h2>Features</h2>
 <ul>
-    <li><strong>User Authentication</strong>: Signup, login, update, and delete operations.</li>
+    <li><strong>User Authentication</strong>: Signup, login, logout, update, and delete operations.</li>
     <li><strong>Product Management</strong>: CRUD operations for products, with restrictions based on user roles.</li>
     <li><strong>Cart Management</strong>: Add to cart and purchase options, with quantity management.</li>
     <li><strong>Public Access</strong>: Endpoint to display all products.</li>
@@ -65,7 +64,7 @@ JWT_SECRET=your_jwt_secret</code></pre>
 <ul>
     <li><strong>Get All Products</strong>: <code>GET /api/products/all</code></li>
     <li><strong>Get User Products</strong>: <code>GET /api/products</code> (requires authentication)</li>
-    <li><strong>Create Product</strong>: <code>POST /api/products</code> (requires authentication and restricts admin)</li>
+    <li><strong>Create Product</strong>: <code>POST /api/products</code> (requires authentication and admin role)</li>
     <li><strong>Get Product by ID</strong>: <code>GET /api/products/:id</code> (requires authentication)</li>
     <li><strong>Update Product</strong>: <code>PATCH /api/products/:id</code> (requires authentication)</li>
     <li><strong>Delete Product</strong>: <code>DELETE /api/products/:id</code> (requires authentication)</li>
@@ -81,6 +80,7 @@ JWT_SECRET=your_jwt_secret</code></pre>
 <ul>
     <li><strong>Signup</strong>: <code>POST /api/users/signup</code></li>
     <li><strong>Login</strong>: <code>POST /api/users/login</code></li>
+    <li><strong>Logout</strong>: <code>POST /api/users/logout</code></li>
     <li><strong>Get All Users</strong>: <code>GET /api/users</code> (requires authentication and admin role)</li>
     <li><strong>Get User by ID</strong>: <code>GET /api/users/:id</code> (requires authentication)</li>
     <li><strong>Update User</strong>: <code>PATCH /api/users/:id</code> (requires authentication)</li>
@@ -98,10 +98,15 @@ JWT_SECRET=your_jwt_secret</code></pre>
             <li>Users can signup and login to get a token for authorized actions.</li>
         </ul>
     </li>
+    <li><strong>Logout</strong>:
+        <ul>
+            <li>Users can log out, which invalidates their token. Any further attempts to perform CRUD operations will result in an error indicating the token is invalid or expired.</li>
+        </ul>
+    </li>
     <li><strong>Product Management</strong>:
         <ul>
             <li>Users can create, read, update, and delete their own products.</li>
-            <li>Admins can read, update and delete all products but cannot create them.</li>
+            <li>Admins can read and update all products but cannot create them.</li>
         </ul>
     </li>
     <li><strong>Cart and Purchase</strong>:
