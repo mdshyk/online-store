@@ -15,6 +15,8 @@
     <li><strong>Product Management</strong>: CRUD operations for products, with restrictions based on user roles.</li>
     <li><strong>Cart Management</strong>: Add to cart and purchase options, with quantity management.</li>
     <li><strong>Public Access</strong>: Endpoint to display all products.</li>
+    <li><strong>Search by Product Name</strong>: Search for products by name, with partial name matches.</li>
+    <li><strong>Filter by Price</strong>: Filter products by a specified price range.</li>
 </ul>
 
 <h2>User Roles</h2>
@@ -68,6 +70,8 @@ JWT_SECRET=your_jwt_secret</code></pre>
     <li><strong>Get Product by ID</strong>: <code>GET /api/products/:id</code> (requires authentication)</li>
     <li><strong>Update Product</strong>: <code>PATCH /api/products/:id</code> (requires authentication)</li>
     <li><strong>Delete Product</strong>: <code>DELETE /api/products/:id</code> (requires authentication)</li>
+    <li><strong>Search Products by Name</strong>: <code>GET /api/products/search</code> (requires query parameter <code>name</code>)</li>
+    <li><strong>Filter Products by Price</strong>: <code>GET /api/products/filter</code> (requires query parameters <code>minPrice</code> and <code>maxPrice</code>)</li>
 </ul>
 
 <h3>Cart Endpoints</h3>
@@ -113,6 +117,16 @@ JWT_SECRET=your_jwt_secret</code></pre>
         <ul>
             <li>Users can add products to their cart specifying the quantity.</li>
             <li>Users can purchase products, reducing the quantity by 1 each time.</li>
+        </ul>
+    </li>
+    <li><strong>Search by Product Name</strong>:
+        <ul>
+            <li>Users can search for products by name, even with partial matches.</li>
+        </ul>
+    </li>
+    <li><strong>Filter by Price</strong>:
+        <ul>
+            <li>Users can filter products by specifying a price range.</li>
         </ul>
     </li>
     <li><strong>Public Access</strong>:
