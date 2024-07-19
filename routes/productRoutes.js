@@ -6,11 +6,13 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.get('/all', productController.getAllProducts)
+router.get('/search', productController.searchProduct);
+router.get('/filter', productController.filterProduct);
 
 router
     .route('/')
     .get(authController.protect, productController.getProducts)
-    .post(authController.protect, authController.restrictFor('admin'), productController.createProduct);
+    .post(authController.protect, authController.restrictFor('admin'), productController.createProduct)
 
 router
     .route('/:id')

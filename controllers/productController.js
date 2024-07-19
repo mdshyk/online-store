@@ -22,11 +22,7 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
 });
 
 exports.getProducts = catchAsync(async (req, res, next) => {
-        const products = await Product.find(
-            {
-                user : req.user._id
-            }
-        );
+        const products = await Product.find({user : req.user._id});
 
         if (!products || products.length === 0) {
             return res.status(404).json({
@@ -109,5 +105,51 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
         status: 'success',
         message: 'Product successfully deleted',
         data: {}
+    });
+});
+
+exports.searchProduct = catchAsync(async (req, res, next) => {
+    const productName = req.body.name;
+    
+    const regex = new RegExp(productName, "i");
+
+    const products = await Product.find({ name: { $regex: regex } });
+
+
+    if (products.length > 0) {
+        return res.status(200).json({
+            status: 'success',
+            results: products.length,
+            data: {
+                products
+            }
+        });
+    }
+
+    return res.status(404).json({
+        status: 'fail',
+        message: 'No products found.'
+    });
+});
+
+exports.filterProduct = catchAsync(async (req, res, next) => {
+
+    const products = await Product.find({
+        price: { $gte: req.body.minPrice, $lte: req.body.maxPrice }
+    });
+
+    if (products.length > 0) {
+        return res.status(200).json({
+            status: 'success',
+            results: products.length,
+            data: {
+                products
+            }
+        });
+    }
+
+    return res.status(404).json({
+        status: 'fail',
+        message: 'No products found in the specified price range.'
     });
 });
